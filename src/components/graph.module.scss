@@ -1,0 +1,6 @@
+// Namespaced custom styles.
+@import '~ui/shared';
+
+.main {
+  -custom-noop: noop; // force namespacing for empty style
+}

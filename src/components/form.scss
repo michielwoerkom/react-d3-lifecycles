@@ -1,0 +1,21 @@
+@import '~ui/shared';
+
+@import '~carbon-components/scss/components/form/form';
+@import '~carbon-components/scss/components/button/button';
+@import '~carbon-components/scss/components/text-input/text-input';
+
+
+
+div[class^="form_main"] {
+  .bx--row {
+    justify-content:center;
+    padding-bottom: $spacing-06;
+    border-bottom:1px solid $brand-01;
+  }
+  .bx--form {
+    display:flex;
+    flex-wrap: nowrap;
+    justify-content:space-around;
+    width:50%;
+  }
+}
