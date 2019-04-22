@@ -19,16 +19,13 @@ class SprintTable extends Component {
 
   render() {
     const headers = [
-      { key: 'ID', header: 'id' },
       { key: 'Name', header: 'Name' },
       { key: 'Points', header: 'Amount of points' },
       { key: 'Delete', header: 'delete' }
     ];
-    const rows = [
-      {id:1, name: 'sprint1', amount: '15', delete: 'delete'},
-      {id:2, name: 'sprint2', amount: '16', delete: 'delete'},
-      {id:3, name: 'sprint3', amount: '17', delete: 'delete'}
-    ];
+
+    const rows = this.props.rows;
+
     if (rows) {
       return (
         <div className={styles.main}>
@@ -47,13 +44,12 @@ class SprintTable extends Component {
               </TableHead>
               <TableBody>
                 {rows.length ? (
-                  rows.map(value => {
+                  rows.map((d, i) => {
                     return (
-                      <TableRow key={value.id}>
-                        <TableCell>{value.id}</TableCell>
-                        <TableCell>{value.name}</TableCell>
-                        <TableCell>{value.amount}</TableCell>
-                        <TableCell>{value.delete}</TableCell>
+                      <TableRow key={i}>
+                        <TableCell>{d.sprintName}</TableCell>
+                        <TableCell>{d.sprintPoints}</TableCell>
+                        <TableCell>delete</TableCell>
                       </TableRow>
                     );
                   })

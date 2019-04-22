@@ -1,5 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import App from './App';
+import filledFormReducer from './store/reducers';
+
+ReactDOM.render(
+  <Provider store={createStore(filledFormReducer)}>
+    <App />
+  </Provider>,
+  document.querySelector('#root')
+);

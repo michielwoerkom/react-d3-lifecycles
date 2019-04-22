@@ -5,11 +5,13 @@ import './graph.scss';
 import styles from './graph.module.scss';
 
 class Graph extends Component {
-  componentDidMount() {
+  componentDidUpdate() {
+    console.log(this.props.rows)
+    // const data = this.props.rows;
     const data = [
-      {id:1, name: 'sprint1', amount: '15', delete: 'delete'},
-      {id:2, name: 'sprint2', amount: '16', delete: 'delete'},
-      {id:3, name: 'sprint3', amount: '17', delete: 'delete'}
+      {sprintName: 'sprint1', sprintPoints: '15'},
+      {sprintName: 'sprint2', sprintPoints: '16'},
+      {sprintName: 'sprint3', sprintPoints: '17'}
     ];
 
     // what are these and are they things that someone should edit
@@ -22,12 +24,12 @@ class Graph extends Component {
     // Set the scales
     const x = d3.scaleBand()
       .rangeRound([0, width])
-      .domain(data.map((d) => d.name))
+      .domain(data.map((d) => d.sprintName))
       .padding(0.5);
 
     const y = d3.scaleLinear()
       .range([height, 0])
-      .domain([0, d3.max(data, (d) => d.amount)]);
+      .domain([0, d3.max(data, (d) => d.sprintPoints)]);
 
     // // Set the axes
     const xAxis = d3.axisBottom()
@@ -89,7 +91,7 @@ class Graph extends Component {
       .data(data)
       .enter().append('rect')
       .attr('class', 'bar')
-      .attr('x', (d) => x(d.name))
+      .attr('x', (d) => x(d.sprintName))
       .attr('y', (d) => height)
       .attr('height', 0)
       .attr('width', x.bandwidth())
@@ -97,8 +99,8 @@ class Graph extends Component {
       .transition()
       .duration(500)
       .delay((d, i) => i * 50)
-      .attr('height', (d) => height - y(d.amount))
-      .attr('y', (d) => y(d.amount));
+      .attr('height', (d) => height - y(d.sprintPoints))
+      .attr('y', (d) => y(d.sprintPoints));
 
     // Select Tooltip
     const tooltip = d3.select('.tooltip');
@@ -110,15 +112,15 @@ class Graph extends Component {
             .attr('fill', color)
         tooltip
             .style('display', 'inherit')
-            .text(`${d.amount} points`)
-            .style('top', `${y(d.amount) - axisOffset}px`);
+            .text(`${d.sprintPoints} points`)
+            .style('top', `${y(d.sprintPoints) - axisOffset}px`);
 
         let bandwidth = x.bandwidth();
         let tooltipWidth = tooltip.nodes()[0].getBoundingClientRect().width;
         let offset = (tooltipWidth - bandwidth) / 2;
 
         tooltip
-            .style('left', `${x(d.name) + margin.left - offset}px`)
+            .style('left', `${x(d.sprintName) + margin.left - offset}px`)
       })
       .on('mouseout', function(d) {
         d3.select(this)
