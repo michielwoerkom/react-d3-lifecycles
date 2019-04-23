@@ -3,11 +3,7 @@
 @import '~carbon-components/scss/components/loading/loading';
 
 div[class^="app_main"] {
-  @media (min-width: 1600px) {
-    .bx--grid {
-        margin-left: 5%;
-        margin-right: 5%;
-    };
+  .bx--row {
+    margin-top: $spacing-06;
   };
-
 }

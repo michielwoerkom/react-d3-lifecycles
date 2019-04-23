@@ -1,6 +1,6 @@
 @import '~ui/shared';
 
-div[class^="graph"] {
+div[class^="graphMethod1"] {
   .overlay {
     fill: #3d70b2;
     opacity: .1;
@@ -28,6 +28,7 @@ div[class^="graph"] {
   }
 
   .graph-container {
+    display:inline-block;
     position: relative;
   }
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Form, TextInput, Button } from 'carbon-components-react';
 
-import { filledForm } from '../store/actions';
+import { rows } from '../store/actions';
 
 import './form.scss';
 import styles from './form.module.scss';
@@ -24,25 +24,25 @@ class MainForm extends Component {
 
   onSubmit = (e) => {
     const formData = {sprintName: this.state.sprintName, sprintPoints: this.state.sprintPoints};
-    this.props.filledForm(formData);
+    this.props.rows(formData);
     e.preventDefault();
   };
 
   render() {
-
-
     return (
       <div className={styles.main}>
         <div className="bx--row">
           <Form onSubmit={this.onSubmit}>
               <TextInput
-                className="sprint-name"
+                id="sprint-name"
+                labelText=""
                 placeholder="Sprint name"
                 value={this.state.sprintName}
                 onChange={this.onSprintNameChange}
               />
               <TextInput
-                className="sprint-name"
+                id="sprint-points"
+                labelText=""
                 placeholder="Amount of points"
                 value={this.state.sprintPoints}
                 onChange={this.onSprintPointsChange}
@@ -58,7 +58,7 @@ class MainForm extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ filledForm }, dispatch);
+  return bindActionCreators({ rows }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(MainForm);

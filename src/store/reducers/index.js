@@ -1,10 +1,19 @@
-const filledFormReducer = (filledForm = [], action) => {
-  if (action.type === 'FILLED_FORM') {
-    console.log(action.payload);
-    console.log([...filledForm, action.payload]);
-    return [...filledForm, action.payload];
+const rowReducer = (state = [], action) => {
+  switch(action.type) {
+    case 'FILLED_FORM':
+      return [...state, action.payload];
+
+    case 'DELETE_ROW':
+      const rowId = action.payload;
+      return state.filter((d, i) => {
+        if (rowId != i) {
+          return d;
+        }
+      });
+
+    default:
+      return state;
   }
-  return filledForm;
 };
 
-export default filledFormReducer;
+export default rowReducer;

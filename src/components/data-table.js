@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { deleteRow } from '../store/actions';
 
 import { DataTable, InlineNotification} from 'carbon-components-react';
 
@@ -15,7 +19,14 @@ const {
   TableHeader
 } = DataTable;
 
+let rows;
+
 class SprintTable extends Component {
+  delete(e) {
+    const rowId = e.target.id;
+    this.props.deleteRow(rowId);
+    e.preventDefault();
+  }
 
   render() {
     const headers = [
@@ -24,7 +35,7 @@ class SprintTable extends Component {
       { key: 'Delete', header: 'delete' }
     ];
 
-    const rows = this.props.rows;
+    rows = this.props.rows;
 
     if (rows) {
       return (
@@ -49,7 +60,7 @@ class SprintTable extends Component {
                       <TableRow key={i}>
                         <TableCell>{d.sprintName}</TableCell>
                         <TableCell>{d.sprintPoints}</TableCell>
-                        <TableCell>delete</TableCell>
+                        <TableCell id={i} className={styles.link} onClick={(e) => this.delete(e)}>delete</TableCell>
                       </TableRow>
                     );
                   })
@@ -60,7 +71,7 @@ class SprintTable extends Component {
                         hideCloseButton={true}
                         kind="info"
                         title="No data found"
-                        subtitle="No machines found."
+                        subtitle="Fill out the form."
                       />
                     </TableCell>
                   </TableRow>
@@ -73,5 +84,8 @@ class SprintTable extends Component {
     }
   }
 }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ deleteRow }, dispatch);
+}
 
-export default SprintTable;
+export default connect(null, mapDispatchToProps)(SprintTable);

@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import App from './App';
-import filledFormReducer from './store/reducers';
+import rowReducer from './store/reducers';
 
 ReactDOM.render(
-  <Provider store={createStore(filledFormReducer)}>
+  <Provider store={createStore(rowReducer)}>
     <App />
   </Provider>,
   document.querySelector('#root')
